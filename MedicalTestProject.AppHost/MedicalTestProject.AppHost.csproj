@@ -1,0 +1,18 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.4">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <UserSecretsId>3e4b1b71-5cc9-4025-be72-3582e9c02673</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MedicalTestProject.ApiService\MedicalTestProject.ApiService.csproj" />
+    <ProjectReference Include="..\MedicalTestProject.MigrationService\MedicalTestProject.MigrationService.csproj" />
+  </ItemGroup>
+
+</Project>

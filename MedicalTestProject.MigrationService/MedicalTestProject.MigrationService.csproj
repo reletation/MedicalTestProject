@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+	<PropertyGroup>
+		<UserSecretsId>dotnet-MigrationService-c0cd260a-47b4-4a29-beff-55e94df0c664</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" />
+		<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MedicalTestProject.ApiService\MedicalTestProject.ApiService.csproj" />
+		<ProjectReference Include="..\MedicalTestProject.ServiceDefaults\MedicalTestProject.ServiceDefaults.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path=".editorconfig" />
+    <File Path="aspire.config.json" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="MedicalTestProject.ApiService/MedicalTestProject.ApiService.csproj" />
+  <Project Path="MedicalTestProject.AppHost/MedicalTestProject.AppHost.csproj" />
+  <Project Path="MedicalTestProject.ServiceDefaults/MedicalTestProject.ServiceDefaults.csproj" />
+  <Project Path="MedicalTestProject.MigrationService/MedicalTestProject.MigrationService.csproj" />
+</Solution>
