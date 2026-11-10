@@ -1,7 +1,13 @@
+using FluentValidation;
+using MedicalTestProject.ApiService.Application.Repositories;
+using MedicalTestProject.ApiService.Application.Services;
 using MedicalTestProject.ApiService.Infrastructure.Database;
+using MedicalTestProject.ApiService.Infrastructure.Repositories;
+using MedicalTestProject.ApiService.Infrastructure.Services;
 using MedicalTestProject.ApiService.Presentation.Extensions;
 using MedicalTestProject.ApiService.Presentation.Interceptors;
 using MedicalTestProject.ServiceDefaults;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 namespace MedicalTestProject.ApiService;
 
@@ -14,11 +20,11 @@ public partial class Program
         builder.AddNpgsqlDbContext<MedicalContext>("medical");
 
         IServiceCollection services = builder.Services;
-        IConfigurationRoot config = new ConfigurationBuilder()
-            .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", false, true)
-            .AddJsonFile("appsettings.development.json", true, true)
-            .Build();
+        IConfigurationManager config = builder.Configuration;
+
+        config.SetBasePath(AppContext.BaseDirectory)
+              .AddJsonFile("appsettings.json", false, true)
+              .AddJsonFile("appsettings.development.json", true, true);
 
         services.AddControllers();
 
@@ -30,7 +36,15 @@ public partial class Program
 
         services.AddOpenApi();
 
-        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddExceptionHandler<DomainExceptionHandler>()
+                .AddExceptionHandler<ApplicationExceptionHandler>()
+                .AddExceptionHandler<GlobalExceptionHandler>();
+
+        services.AddRepositories()
+                .AddServices();
+
+        services.AddValidatorsFromAssemblyContaining<Program>();
+        services.AddFluentValidationAutoValidation();
 
         WebApplication app = builder.Build();
 
@@ -43,6 +57,7 @@ public partial class Program
         }
 
         app.MapGet("/", () => "API service for MedicalTestProject");
+        app.MapControllers();
 
         app.Run();
     }
