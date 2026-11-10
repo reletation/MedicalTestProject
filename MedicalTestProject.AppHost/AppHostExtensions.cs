@@ -13,7 +13,7 @@ public static class AppHostExtensions
 
         IResourceBuilder<PostgresDatabaseResource> postgres = builder
             .AddPostgres("postgres", dbUser, dbPass, port)
-            //.WithDataVolume()
+            .WithDataVolume()
             .AddDatabase("medical");
 
         return postgres;
