@@ -14,24 +14,26 @@ public class PatientController(
     public async Task<ActionResult<GetPatientsResponse>> GetAllPatients
         (CancellationToken cancellationToken)
     {
+        GetPatientsResponse response = await patientService.GetPatientsAsync(cancellationToken);
 
-
-        return Ok();
+        return Ok(response);
     }
 
-    [HttpGet]
+    [HttpPost("by-name")]
     public async Task<ActionResult<GetPatientResponse>> GetPatientByName
-        ([FromQuery] GetPatientByNameQuery query, CancellationToken cancellationToken)
+        ([FromBody] GetPersonByNameQuery query, CancellationToken cancellationToken)
     {
+        GetPatientResponse response = await patientService.GetPatientAsyncByNameAsync(query, cancellationToken);
 
-        return Ok();
+        return Ok(response);
     }
 
-    [HttpGet]
-    public async Task<ActionResult<GetPatientResponse>> GetPatientByDisease
-        ([FromQuery] GetPatientByDiseaseQuery query, CancellationToken cancellationToken)
+    [HttpPost("by-disease")]
+    public async Task<ActionResult<GetPatientResponse>> GetPatientsByDisease
+        ([FromBody] GetPatientByDiseaseQuery query, CancellationToken cancellationToken)
     {
+        GetPatientsResponse response = await patientService.GetPatientsAsyncByDiseaseAsync(query, cancellationToken);
 
-        return Ok();
+        return Ok(response);
     }
 }
