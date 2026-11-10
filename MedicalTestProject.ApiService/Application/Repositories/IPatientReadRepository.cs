@@ -4,6 +4,7 @@ namespace MedicalTestProject.ApiService.Application.Repositories;
 
 public interface IPatientReadRepository
 {
+    Task<Patient[]> GetPatentsByDiseaseAsync(string diseaseName, CancellationToken cancellationToken);
     Task<Patient?> GetPatientByName(string firstName, string middleName, string? lastName, CancellationToken cancellationToken);
     Task<Patient[]> GetPatientsAsync(CancellationToken cancellationToken);
 }
